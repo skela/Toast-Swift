@@ -217,7 +217,7 @@ extension UIView {
             activityView.layer.shadowOffset = HRToastShadowOffset
         }
         
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicatorView.center = CGPoint(x: activityView.bounds.size.width / 2, y: activityView.bounds.size.height / 2)
         activityView.addSubview(activityIndicatorView)
         activityIndicatorView.startAnimating()
@@ -226,7 +226,7 @@ extension UIView {
             activityIndicatorView.frame.origin.y -= 10
             let activityMessageLabel = UILabel(frame: CGRect(x: activityView.bounds.origin.x, y: (activityIndicatorView.frame.origin.y + activityIndicatorView.frame.size.height + 10), width: activityView.bounds.size.width, height: 20))
             activityMessageLabel.textColor = UIView.hr_toastFontColor()
-            activityMessageLabel.font = (msg.characters.count<=10) ? UIFont(name:UIView.hr_toastFontName(), size: 16) : UIFont(name:UIView.hr_toastFontName(), size: 13)
+            activityMessageLabel.font = (msg.count<=10) ? UIFont(name:UIView.hr_toastFontName(), size: 16) : UIFont(name:UIView.hr_toastFontName(), size: 13)
             activityMessageLabel.textAlignment = .center
             activityMessageLabel.text = msg
             activityView.addSubview(activityMessageLabel)
@@ -239,7 +239,7 @@ extension UIView {
         
         UIView.animate(withDuration: HRToastFadeDuration,
             delay: 0.0,
-            options: UIViewAnimationOptions.curveEaseOut,
+            options: UIView.AnimationOptions.curveEaseOut,
             animations: {
                 activityView.alpha = 1.0
             },
@@ -251,7 +251,7 @@ extension UIView {
         if existingActivityView == nil { return }
         UIView.animate(withDuration: HRToastFadeDuration,
             delay: 0.0,
-            options: UIViewAnimationOptions.curveEaseOut,
+            options: UIView.AnimationOptions.curveEaseOut,
             animations: {
                 existingActivityView!.alpha = 0.0
             },
@@ -437,8 +437,8 @@ extension String {
         let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineBreakMode = .byWordWrapping;
-        let attributes = [NSAttributedStringKey.font:font!,
-            NSAttributedStringKey.paragraphStyle:paragraphStyle.copy()]
+        let attributes = [NSAttributedString.Key.font:font!,
+                          NSAttributedString.Key.paragraphStyle:paragraphStyle.copy()]
         
         let text = self as NSString
         let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: attributes, context:nil)
